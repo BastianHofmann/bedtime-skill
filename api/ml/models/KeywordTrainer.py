@@ -160,7 +160,7 @@ class KeywordTrainer(Trainer):
             # ignore if stop word
             # add 1 if matches to filter (NOUN, PROPN)
             if not spacy_token[0].is_stop and spacy_token[0].pos_ in self._filter:
-                mask_nouns[i] = [1]
+                mask_nouns[i] = touch.tensor([1])
         return mask_nouns
 
     # overide so that loss is correctly calculate
