@@ -1,0 +1,79 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "bedtime story",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "StoryIntent",
+          "slots": [
+            {
+              "name": "firstkey",
+              "type": "Keyword"
+            },
+            {
+              "name": "secondkey",
+              "type": "Keyword"
+            }
+          ],
+          "samples": [
+            "about {firstkey} and the {secondkey}",
+            "for a story about {firstkey} and {secondkey}",
+            "about {firstkey} and {secondkey}"
+          ]
+        }
+      ],
+      "types": [
+        {
+          "values": [
+            {
+              "name": {
+                "value": "queens"
+              }
+            },
+            {
+              "name": {
+                "value": "alps"
+              }
+            },
+            {
+              "name": {
+                "value": "kings"
+              }
+            },
+            {
+              "name": {
+                "value": "horses"
+              }
+            },
+            {
+              "name": {
+                "value": "cars",
+                "synonyms": [
+                  "cars"
+                ]
+              }
+            }
+          ],
+          "name": "Keyword"
+        }
+      ]
+    }
+  },
+  "version": "6"
+}

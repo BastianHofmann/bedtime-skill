@@ -1,0 +1,19 @@
+fastapi
+uvicorn
+pydantic
+pandas
+sklearn
+
+python-multipart # fastapi upload multiple files
+aiofiles # fastapi upload multiple files
+tqdm # progress bar, transformes also uses it
+pytest
+requests
+mysql-connector-python
+
+tensorflow
+torch
+numpy
+transformers
+datasets
+spacy

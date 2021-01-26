@@ -1,0 +1,41 @@
+version: "3"
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: bedtime-db
+    environment:
+      MYSQL_DATABASE: bedtime
+      MYSQL_PASSWORD: sfj#sjKPSOs.
+      MYSQL_USER: bedtime
+      MYSQL_ROOT_PASSWORD: sfD2.G9df3kBsS3C
+    # restart: unless-stopped
+    # only expose for debugging
+    ports:
+      - 3306:3306
+    volumes:
+      - my-db:/var/lib/mysql # make data persistent
+
+  bedtime-stories:
+    build: .
+    container_name: bedtime-stories
+    depends_on:
+      - db
+    environment:
+      DB_TYPE: mysql
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_USER: bedtime
+      DB_PASS: sfj#sjKPSOs.
+      DB_NAME: bedtime
+    ports:
+      - 8000:8000
+    volumes:
+        - ./api:/api/api 
+
+networks:
+    default:
+        driver: bridge
+
+volumes:
+  my-db:

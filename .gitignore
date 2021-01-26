@@ -1,0 +1,8 @@
+/api/ml/models/runs/
+/api/cached*
+.idea
+.pytest_cache
+.vscode
+__pycache__
+.DS_Store
+api/ml/weights/
