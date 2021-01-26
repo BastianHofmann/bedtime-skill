@@ -102,7 +102,7 @@ class KeywordTrainer(Trainer):
 
                     # only mask if specified
                     if self._mask_nouns:
-                        mask_difference = difference * mask_nouse_gpu
+                        mask_difference = difference * mask_nouns_gpu
                     else:
                         mask_difference = difference
 
