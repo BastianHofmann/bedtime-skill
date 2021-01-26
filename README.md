@@ -80,6 +80,8 @@ Here is a list of all available training hyperparameters:
 
 ## GPT2Tuned
 
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/18wGb5Jx8couTY_ybk4sbt68ZjR7fWkt3?usp=sharing)
+
 The GPT2Tuned model is a normal GPT-2 model fine tuned with our story dataset.
 You can use the predict method with a simple prompt to make predictions:
 
