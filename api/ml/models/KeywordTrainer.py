@@ -18,7 +18,7 @@ from torch.cuda.amp import autocast
 
 
 class KeywordTrainer(Trainer):
-    
+
     def __init__(
         self,
         model: Union[PreTrainedModel, torch.nn.Module] = None,
@@ -38,7 +38,7 @@ class KeywordTrainer(Trainer):
         cos_similarity = False,
         ):
         super().__init__(model, args, data_collator, train_dataset, eval_dataset, tokenizer, model_init ,compute_metrics, callbacks, optimizers)
-        self._normal_word = re.compile('^[a-zA-Z\s]+$') 
+        self._normal_word = re.compile('^[a-zA-Z\s]+$')
         self._mask_nouns = mask_nouns
         self._special_token = special_token
         self._filter = filter_loss
@@ -55,7 +55,7 @@ class KeywordTrainer(Trainer):
             self._cos = torch.nn.CosineSimilarity(dim=1, eps=1e-7)
 
     def keyword_forword_step(self, model, inputs):
-        """Custom way to compute the loss 
+        """Custom way to compute the loss
 
         :param model: the pytorch model
         :type model: model
@@ -73,19 +73,15 @@ class KeywordTrainer(Trainer):
             loss_keyword = torch.tensor(0.)
             loss_keyword = loss_keyword.to(device)
 
-            size_keywords = inputs['keywords'].size() 
+            size_keywords = inputs['keywords'].size()
             for batch in range(size_keywords[0]):
-                
+
                 # only create mask if specified
                 if self._mask_nouns:
                     # create mask
                     mask_nouns = self.create_noun_mask(top1[batch])
                     # move mask to gpu
                     mask_nouns_gpu = mask_nouns.to(device)
-                    # mask nouns
-                    masked = top1[batch] * mask_nouns_gpu
-                else:
-                    masked = top1[batch] 
 
                 for index in range(size_keywords[1]):
                     # calc difference between keyword and the output
@@ -95,24 +91,30 @@ class KeywordTrainer(Trainer):
                         break
 
                     keyword_em = embeddings(inputs['keywords'][batch][index])
-                    mask_em = embeddings(masked)
+                    pred_em = embeddings(top1[batch])
                     if self._cos_similarity:
-                        # add a dimension to the beginning 
+                        # add a dimension to the beginning
                         keyword_em.unsqueeze_(0)
                          # 1 means identical
-                        difference = 1 - self._cos(mask_em, keyword_em)
+                        difference = 1 - self._cos(pred_em, keyword_em)
                     else:
-                        difference = (mask_em - keyword_em) ** 2
+                        difference = (mask_em - pred_em) ** 2
 
-                    loss_keyword += difference.sum()
-            
+                    # only mask if specified
+                    if self._mask_nouns:
+                        mask_difference = difference * mask_nouse_gpu
+                    else:
+                        mask_difference = difference
+
+                    loss_keyword += mask_difference.sum()
+
             print(outputs["loss"])
             print(loss_keyword * self._keyword_loss_weight)
 
         # add exception for testig
         # raise Exception()
         # Save past state if it exists
-       
+
         outputs["loss"] += loss_keyword * self._keyword_loss_weight #if isinstance(outputs, dict) else outputs[0]
         return outputs
 
@@ -121,7 +123,7 @@ class KeywordTrainer(Trainer):
         How the loss is computed by Trainer. By default, all models return the loss in the first element.
         """
         outputs = self.keyword_forword_step(model, inputs)
-        
+
          # TODO: this needs to be fixed and made cleaner later.
         if self.args.past_index >= 0:
             print("Some past value was set")
@@ -140,7 +142,7 @@ class KeywordTrainer(Trainer):
         """
         number_of_samples = batch.size()[0]
 
-        mask_nouns = torch.zeros(number_of_samples, dtype=torch.int8)
+        mask_nouns = torch.zeros(number_of_samples, 1, dtype=torch.int8)
         # ignore where pad is
         for i in range(4, number_of_samples):
             word = self.tokenizer.decode(batch[i])
@@ -154,11 +156,11 @@ class KeywordTrainer(Trainer):
 
             if not spacy_token:
                 print(f"'{word}': {batch[i]}")
-            
-            # ignore if stop word 
+
+            # ignore if stop word
             # add 1 if matches to filter (NOUN, PROPN)
             if not spacy_token[0].is_stop and spacy_token[0].pos_ in self._filter:
-                mask_nouns[i] = 1
+                mask_nouns[i] = [1]
         return mask_nouns
 
     # overide so that loss is correctly calculate
