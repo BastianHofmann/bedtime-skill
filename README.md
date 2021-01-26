@@ -53,6 +53,8 @@ model.save_to_server(save_files=True)
 ```
 
 ## GPT2Keyword
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1qbZ4TXzOWvVvNsylIUIjy15Lz0Tox1DV?usp=sharing)
+
 The training of the GPT2Keyword model is illustrated in the following:
 
 ![Training GPTKeyword](images/training_gpt2keyword.png)
