@@ -78,6 +78,25 @@ Here is a list of all available training hyperparameters:
 | add_space | false | Add a space to each keyword (GPT tokenizer uses different tokens for the same word depending if a trailing space exist)|
 | only_grimm | false | To use only the small fairytales grimm dataset|
 
+## GPT2Tuned
+
+The GPT2Tuned model is a normal GPT-2 model fine tuned with our story dataset.
+You can use the predict method with a simple prompt to make predictions:
+
+```python
+model.predict("Once upon a time there was a cat", max_length=100)
+```
+
+To train the model you can call the `train()` method. It will load the dataset
+and perform fine tuning. The following training hyperparameters are available:
+
+| Parameter      | Default      | Description     |
+| ------------- | ---------- | ----------- |
+| num_train_epochs | 3 | number of training epochs |
+| learning_rate| 5e-5 | the learning rate of the GPT2 model |
+| logging_steps | 500 | after how many steps to perform logging|
+| save_steps | 500 | after how many steps to save the model|
+| save_total_limit | None | how many model saves to keep in total|
 
 ## docker-compose for the server api
 The project consists of two docker images. One image serves the mysql server and
