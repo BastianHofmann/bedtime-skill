@@ -98,7 +98,7 @@ class KeywordTrainer(Trainer):
                          # 1 means identical
                         difference = 1 - self._cos(pred_em, keyword_em)
                     else:
-                        difference = (mask_em - pred_em) ** 2
+                        difference = (pred_em - keyword_em) ** 2
 
                     # only mask if specified
                     if self._mask_nouns:
