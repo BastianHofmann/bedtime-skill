@@ -53,6 +53,8 @@ model.save_to_server(save_files=True)
 ```
 
 ## GPT2Keyword
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1qbZ4TXzOWvVvNsylIUIjy15Lz0Tox1DV?usp=sharing)
+
 The training of the GPT2Keyword model is illustrated in the following:
 
 ![Training GPTKeyword](images/training_gpt2keyword.png)
@@ -79,6 +81,8 @@ Here is a list of all available training hyperparameters:
 | only_grimm | false | To use only the small fairytales grimm dataset|
 
 ## GPT2Tuned
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/18wGb5Jx8couTY_ybk4sbt68ZjR7fWkt3?usp=sharing)
 
 The GPT2Tuned model is a normal GPT-2 model fine tuned with our story dataset.
 You can use the predict method with a simple prompt to make predictions:
