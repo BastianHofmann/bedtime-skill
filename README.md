@@ -159,3 +159,46 @@ You can now use the model like it was trained locally:
 ```python
 pred = model.predict("Once upon a time there was", keywords=['boat', 'dog'], max_length=300)
 ```
+
+## Some sample outputs with GPT2Keyword
+
+Input keywords: "boat, dog"
+>Once upon a time there was a boat and a dog, and the dog was very fond of them.
+>One day, when they were sitting in the boat, they said to each other: 'We are
+>going to the sea to seek our fortune, for we have a long way to go before we
+>reach the land of the Living Sea.' The dog said: ‘I will go and seek my
+>fortune.’ The boat replied:‘Yes, we shall go, but first we must first find a
+>way out of this terrible place, so that we may be able to find our way home
+>again. We shall be very careful not to let any one come near us, as we know
+>that if we do, he will kill us.' So they all set out on their way. When they
+>reached the shore they found a great lake, full of water. They looked about
+>them and saw that it was covered with a thicket of trees. Then they thought to
+>themselves: If we could only find the way we had come to this place! They went
+>on and on, till at last they came to a little island, which was surrounded by a
+>wide sea. It was so small that they could hardly see it. At the bottom of it
+>they saw a huge fish swimming about in a pool. The fish was as big as a man and
+>had a tail like that of a giant. He had three heads, one on each side of his
+>body.
+
+Input keywords: "king, father"
+>Once upon a time there was a king who had three sons. One of them was the son
+>of a merchant, and the other was his son-in-law. The king's son was very fond
+>of his father, for he had a great deal of money, but he did not like to spend
+>it on anything else, so he went to the king and said to him, 'If you will give
+>me a piece of gold, I will take it to you and give you a hundred pieces of
+>silver.' So he took the gold and gave him to his eldest son, who was much more
+>clever than he was. When he saw that his brother was so clever, he thought to
+>himself, Why should he not give him the money that was in his pocket, if he
+>could get it for himself' 'Why should I give my brother the silver' he said.
+>'Because he is a clever man. He has no money to give to anyone else. If he
+>wants to get a thousand pieces, let him.' 'I will do that,' said the eldest
+>brother; 'and if I want to have a million pieces for myself, give them to my
+>son.' And he gave the second son the hundred gold pieces. Then the third son
+>said, What is the matter with you' And the youngest son answered, Well, it is
+>nothing at all. But the elder brother thought, If I can get my brothers' money
+>for themselves, then I shall be able to ...
+
+## Contributors
+**Bastian Hofmann, Michael Günther**<br>
+The projected was created in the Applied Deep Learning for NLP course at the TUM
+by Juan Carlos Medina Serrano.
